@@ -55,6 +55,8 @@ class Student(models.Model):
     vaqt = models.CharField(max_length=50)
     kun = models.CharField(max_length=50)
     telefon = models.CharField(max_length=11)
+    def __str__(self):
+        return self.ismi +" "+ self.familya
 
 class Yunalishlar(models.Model):
     nomi = models.CharField(max_length=50)

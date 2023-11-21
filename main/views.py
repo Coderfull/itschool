@@ -19,4 +19,5 @@ def CreateStudentView(request):
         new_student.save()
 
     yunalishlar = Yunalishlar.objects.all()
-    return render(request, "create_student.html", {"yunalishlar": yunalishlar})
+    studentlar = Student.objects.all()
+    return render(request, "create_student.html", {"yunalishlar": yunalishlar,"studentlar":studentlar})

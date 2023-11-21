@@ -30,6 +30,35 @@
             </div>
           </div>
         </div>
+        <div class="table-responsive">
+            <table class="table table-striped
+            table-hover	
+            table-bordered
+            align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Ismi</th>
+                        <th>Familyasi</th>
+                        <th>Yunalish</th>
+                        <th>Vaqt</th>
+                        <th>Kun</th>
+                        <th>Telefon</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {% for student in studentlar %}
+                        <tr>
+                            <td>{{student.ismi}}</td>
+                            <td>{{student.familya}}</td>
+                            <td>{{student.yunalish}}</td>
+                           
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+
+            </table>
+        </div>
     {% elif user.role == "admin" %}
         Salom boshiq siz Assistantlar ruyxatini ko'rishingiz mumkin
         <div class="table-responsive">
@@ -71,6 +100,7 @@
             </div>
         </div>
     </div>
+
     {% endif %}
 </body>
 {% endblock body %}
