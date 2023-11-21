@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block body %}
+<body class="m-5">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3 row">
+                <label for="inputName" class="col-4 col-form-label">Ismi</label>
+                <div class="col-8">
+                    <input type="text" class="form-control" name="inputName" id="inputName" placeholder="Ismini kiriting:">
+                </div>
+            </div>
+                <div class="mb-3 row">
+                <label for="familya" class="col-4 col-form-label">Familya</label>
+                <div class="col-8">
+                    <input type="text" class="form-control" name="familya" id="familya" placeholder="Familyani kiriting:">
+                </div> 
+            </div>
+                <div class="mb-3 row">
+                <label for="yunalish" class="col-4 col-form-label">Yunalish tanlang</label>
+                <div class="col-8">
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" id="yunalish" name="yunalish">
+                            <option selected>Yunalish tanlang</option>
+                            {% for yunalish in yunalishlar %}<option value="{{yunalish.nomi}}">{{yunalish.nomi}}</option>{% endfor %}
+                          </select>
+                    </div>
+                </div> 
+            </div>
+                <div class="mb-3 row">
+                <label for="vaqt" class="col-4 col-form-label">Vaqt</label>
+                <div class="col-8">
+                    <div class="mb-3">
+                        <select class="form-select form-select-lg" name="vaqt" id="vaqt">
+                            <option selected>Vaqtni tanlang</option>
+                            <option value="">8-10</option>
+                            <option value="">10-12</option>
+                            <option value="">14-16</option>
+                            <option value="">16-18</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+                <div class="mb-3 row">
+                    <label for="kun" class="col-4 col-form-label">Kun</label>
+                    <div class="col-8">
+                        <div class="mb-3">
+                            <select class="form-select form-select-lg" name="kun" id="kun">
+                                <option selected>Kunni tanlang</option>
+                                <option value="">Dushanba, Chorshanba, Juma</option>
+                                <option value="">Seshanba, Payshanba, Shanba</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="phone" class="col-4 col-form-label">Telefon raqam</label>
+                    <div class="col-8">
+                        <div class="mb-3">
+                            
+                          <input type="text"
+                            class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="+989 (__) ___-__-__" data-slots="_">
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="mb-3 row">
+                <div class="offset-sm-4 col-sm-8">
+                    <button type="submit" class="btn btn-primary">Qo'shish</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        // This code empowers all input tags having a placeholder and data-slots attribute
+document.addEventListener('DOMContentLoaded', () => {
+    for (const el of document.querySelectorAll("[placeholder][data-slots]")) {
+        const pattern = el.getAttribute("placeholder"),
+            slots = new Set(el.dataset.slots || "_"),
+            prev = (j => Array.from(pattern, (c,i) => slots.has(c)? j=i+1: j))(0),
+            first = [...pattern].findIndex(c => slots.has(c)),
+            accept = new RegExp(el.dataset.accept || "\\d", "g"),
+            clean = input => {
+                input = input.match(accept) || [];
+                return Array.from(pattern, c =>
+                    input[0] === c || slots.has(c) ? input.shift() || c : c
+                );
+            },
+            format = () => {
+                const [i, j] = [el.selectionStart, el.selectionEnd].map(i => {
+                    i = clean(el.value.slice(0, i)).findIndex(c => slots.has(c));
+                    return i<0? prev[prev.length-1]: back? prev[i-1] || first: i;
+                });
+                el.value = clean(el.value).join``;
+                el.setSelectionRange(i, j);
+                back = false;
+            };
+        let back = false;
+        el.addEventListener("keydown", (e) => back = e.key === "Backspace");
+        el.addEventListener("input", format);
+        el.addEventListener("focus", format);
+        el.addEventListener("blur", () => el.value === pattern && (el.value=""));
+    }
+});
+    </script>
+</body>
+{% endblock body %}
+
