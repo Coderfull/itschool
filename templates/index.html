@@ -51,7 +51,11 @@
                             <td>{{student.ismi}}</td>
                             <td>{{student.familya}}</td>
                             <td>{{student.yunalish}}</td>
-                           
+                            <td>{{student.vaqt}}</td>
+                            <td>{{student.kun}}</td>
+                            <td>{{student.telefon}}</td>
+
+                            
                         </tr>
                         {% endfor %}
                         
@@ -60,7 +64,7 @@
             </table>
         </div>
     {% elif user.role == "admin" %}
-        Salom boshiq siz Assistantlar ruyxatini ko'rishingiz mumkin
+        Salom boshiq. Siz Assistantlar ruyxatini ko'rishingiz mumkin
         <div class="table-responsive">
             <table class="table table-striped
             table-hover	
